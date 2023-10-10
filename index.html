@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <h2>Задание 1</h2>
+      <!-- 1. Создать кнопку "Перевернуть". При клике на кнопку текст кнопки 
+    должен перевернуться и отобразиться в обратном порядке. -->
+      <button @click="reverseBtnText">{{btnText}}</button>
+
+      <h2>Задание 2</h2>
+      <!-- 2. Есть список элементов. Пользователь может добавлять новые элементы 
+      списка с текстом “Новый элемент списка” нажав на кнопку "Добавить". -->
+      <!-- 3. *Дополнительное задание: При клике на элемент списка он должен быть удален. -->
+      <ul>
+        <li
+          v-for="item in myList"
+          :key="item.id"
+          @click="deleteElement($event)"
+        >
+          {{item.name}}
+        </li>
+      </ul>
+      <button @click="addNewElement">Добавить</button>
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+      const App = {
+        data() {
+          return {
+            btnText: "Перевернуть",
+            myList: [
+              { id: 1, name: "элемент списка 1" },
+              { id: 2, name: "элемент списка 2" },
+              { id: 3, name: "элемент списка 3" },
+            ],
+          };
+        },
+        methods: {
+          reverseBtnText() {
+            this.btnText = this.btnText.split("").reverse("").join("");
+          },
+          addNewElement() {
+            this.myList.push({ name: "Новый элемент списка" });
+          },
+          deleteElement(event) {
+            event.target.remove();
+          },
+        },
+      };
+      Vue.createApp(App).mount("#app");
+    </script>
+  </body>
+</html>
